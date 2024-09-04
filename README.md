@@ -132,14 +132,14 @@ Important: If at any point during this setup you encounter a "command not found"
 Note: The exact paths may vary depending on your system and where each program was installed. Adjust the paths as necessary if you encounter issues.
 
 ## Project Structure
-
+<br>
 claude-token/
-├── Cargo.toml
-├── src/
-│   ├── lib.rs
-│   ├── client.ts
-│   ├── client.testnet.ts
-│   ├── client.mainnet.ts
-│   └── client.devnet.ts
-├── security.txt
-└── README.md
+<br>├── Cargo.toml
+<br>├── src/
+<br>│   ├── lib.rs
+<br>│   ├── client.ts
+<br>│   ├── client.testnet.ts
+<br>│   ├── client.mainnet.ts
+<br>│   └── client.devnet.ts
+<br>├── security.txt
+<br>└── README.md
