@@ -1,0 +1,12 @@
+[package]
+name = "claude-token"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+solana-program = "1.16"
+spl-token = { version = "3.5", features = ["no-entrypoint"] }
+thiserror = "1.0"
+
+[lib]
+crate-type = ["cdylib", "lib"]
