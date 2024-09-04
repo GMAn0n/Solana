@@ -1,0 +1,6 @@
+In my opinion, the toughest part of deploying a token on Solana is the program code itself. It is nothing like solidity, a completely foreign language. Some of the easier parts may be setting up your dev environment, and downloading required dependencies. 
+I found setting my path to be a constant point of contention in my creation of this project, which is something I did probably a dozen times over the last 8 hours.
+Once you have your dev environment setup, this should provide you the base layer files you need to deploy a token successfully. I've only done this on devnet as I have no business or token to launc on mainnet. There may be some small changes, or issues that arise. 
+
+
+Please let me know how your experience is trying this out, hope it works! I know it did for me, even if it wasn't easy. 
