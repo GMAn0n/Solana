@@ -1,0 +1,27 @@
+# Security Policy
+
+## Reporting a Vulnerability
+
+If you discover a security vulnerability within this project, please send an email to [your-email@example.com]. All security vulnerabilities will be promptly addressed.
+
+Please do not disclose security-related issues publicly until a fix has been announced.
+
+## Preferred Languages
+
+We prefer all communications to be in English.
+
+## Policy
+
+We will respond to your report within 3 business days with our evaluation and expected resolution date. If you have followed the instructions above, we will not take any legal action against you in regard to the report.
+
+## Acknowledgments
+
+We would like to thank the following reporters for working with us to find and resolve security issues:
+
+[List will be updated as we receive reports]
+
+# Encryption
+
+For sensitive information, please use our PGP key below:
+
+[Your PGP public key here]
