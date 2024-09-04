@@ -159,14 +159,8 @@ Before deploying your token, you need to configure its details and prepare for t
    ```
    Ensure that the rest of `src/lib.rs` contains the necessary token logic and instruction handlers.
 
-2. Client Configuration:
-   The base client implementation is in `src/client.ts`. This file contains the `ClaudeTokenClient` class with methods for various token operations.
 
-3. Network-Specific Client Configuration:
-   - `src/client.devnet.ts` is already configured for devnet with the correct connection and program ID.
-   - `src/client.testnet.ts` and `src/client.mainnet.ts` should be configured similarly for their respective networks.
-
-4. Deployment:
+2. Deployment:
    a. For Devnet:
       ```powershell
       solana config set --url https://api.devnet.solana.com
@@ -188,10 +182,10 @@ Before deploying your token, you need to configure its details and prepare for t
       solana program deploy target/deploy/claude_token.so
       ```
 
-5. Update Program ID:
+3. Update Program ID:
    After deployment, update the `programId` in the respective network client file (`src/client.devnet.ts`, `src/client.testnet.ts`, or `src/client.mainnet.ts`) with the program ID output from the deployment step.
 
-6. Token Operations:
+4. Token Operations:
    Use the methods provided in the `ClaudeTokenClient` class (or its network-specific subclasses) to perform operations such as:
    - Initialize mint: `client.initializeMint(mintAuthority, freezeAuthority)`
    - Initialize account: `client.initializeAccount(owner, mint)`
