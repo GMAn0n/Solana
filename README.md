@@ -138,8 +138,81 @@ claude-token/
 <br>├── src/
 <br>│   ├── lib.rs
 <br>│   ├── client.ts
+<br>│   ├── client.devnet.ts
 <br>│   ├── client.testnet.ts
 <br>│   ├── client.mainnet.ts
-<br>│   └── client.devnet.ts
 <br>├── security.txt
 <br>└── README.md
+<br>
+
+## Token Configuration and Deployment
+
+Before deploying your token, you need to configure its details and prepare for the specific network (devnet, testnet, or mainnet). Follow these steps:
+
+1. Token Configuration:
+   Open `src/lib.rs` and update the following constants:
+   ```rust
+   pub const TOKEN_NAME: &str = "Claude Token";
+   pub const TOKEN_SYMBOL: &str = "CLAUD";
+   pub const TOKEN_DECIMALS: u8 = 9;
+   pub const INITIAL_SUPPLY: u64 = 1_000_000_000; // Adjust as needed
+   ```
+   Ensure that the rest of `src/lib.rs` contains the necessary token logic and instruction handlers.
+
+2. Client Configuration:
+   The base client implementation is in `src/client.ts`. This file contains the `ClaudeTokenClient` class with methods for various token operations.
+
+3. Network-Specific Client Configuration:
+   - `src/client.devnet.ts` is already configured for devnet with the correct connection and program ID.
+   - `src/client.testnet.ts` and `src/client.mainnet.ts` should be configured similarly for their respective networks.
+
+4. Deployment:
+   a. For Devnet:
+      ```powershell
+      solana config set --url https://api.devnet.solana.com
+      cargo build-bpf
+      solana program deploy target/deploy/claude_token.so
+      ```
+   
+   b. For Testnet:
+      ```powershell
+      solana config set --url https://api.testnet.solana.com
+      cargo build-bpf
+      solana program deploy target/deploy/claude_token.so
+      ```
+   
+   c. For Mainnet:
+      ```powershell
+      solana config set --url https://api.mainnet-beta.solana.com
+      cargo build-bpf
+      solana program deploy target/deploy/claude_token.so
+      ```
+
+5. Update Program ID:
+   After deployment, update the `programId` in the respective network client file (`src/client.devnet.ts`, `src/client.testnet.ts`, or `src/client.mainnet.ts`) with the program ID output from the deployment step.
+
+6. Token Operations:
+   Use the methods provided in the `ClaudeTokenClient` class (or its network-specific subclasses) to perform operations such as:
+   - Initialize mint: `client.initializeMint(mintAuthority, freezeAuthority)`
+   - Initialize account: `client.initializeAccount(owner, mint)`
+   - Mint tokens: `client.mintTo(mintAuthority, mintPubkey, destinationPubkey, amount)`
+   - Burn tokens: `client.burn(owner, accountPubkey, mintPubkey, amount)`
+   - Transfer tokens: `client.transfer(owner, sourcePubkey, destinationPubkey, amount)`
+   - Freeze/thaw accounts: `client.freezeAccount(freezeAuthority, accountPubkey, mintPubkey)` and `client.thawAccount(freezeAuthority, accountPubkey, mintPubkey)`
+   - Set authorities: `client.setAuthority(currentAuthority, accountOrMintPubkey, authorityType, newAuthority)`
+   - Set metadata: `client.setMetadata(authority, mintPubkey, name, symbol, uri)`
+
+   Example usage:
+   ```typescript
+   const client = new ClaudeTokenClientDevnet();
+   const mintAuthority = Keypair.generate();
+   const freezeAuthority = Keypair.generate();
+
+   // Initialize mint
+   const mintTx = await client.initializeMint(mintAuthority, freezeAuthority);
+   console.log('Mint initialized:', mintTx);
+
+   // Other operations follow a similar pattern
+   ```
+
+Remember to thoroughly test on devnet and testnet before deploying to mainnet. Always handle private keys securely and never share them.
